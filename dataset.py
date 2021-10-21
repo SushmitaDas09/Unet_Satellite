@@ -45,10 +45,10 @@ class cmu_mini_dataset(Dataset):
         gt_img = os.path.join(self.path2, self.names2[idx])           
         #img_name2 = os.path.join(self.path2, '_groundtruth_(1)_Inp'+self.names[idx][12:])
         image1 = cv2.imread(img)                                                
-        img = cv2.imread(gt_img)
-        image2 = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        image2 = cv2.imread(gt_img)
+        image2 = cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
         im_tensor1 = self.trans(image1)
-        im_tensor2 = self.trans(image2)
+        im_tensor2 = torch.FloatTensor(resize(image2,(128,128),anti_aliasing=True))
         return im_tensor1,im_tensor2
 
 
