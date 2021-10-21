@@ -4,6 +4,7 @@ from torch.utils.data import Dataset, DataLoader
 import matplotlib.pyplot as plt
 from torchvision import transforms
 from skimage.transform import resize
+import torch
 
 # data augmentation
 # changin to gpu
