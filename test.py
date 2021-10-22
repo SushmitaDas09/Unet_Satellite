@@ -39,7 +39,7 @@ for file in files:
         #im_tensor = transformer(im).unsqueeze(0).cuda()
         img = resize(im, (128, 128), anti_aliasing=True)
         img = transformer(img).float()
-        gt_img = resize(gt_img, (128, 128), anti_aliasing=True)
+        gt_img = resize(gt, (128, 128), anti_aliasing=True)
         gt_img = transformer(gt_img).float()
         im_tensor = img.cuda()
         gt_tensor = gt_img.cuda()
