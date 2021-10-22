@@ -19,7 +19,7 @@ i=0
 for file in files:
         img_path = os.path.join(path, file)
         im = cv2.imread(img_path)
-        file1 = ('new_'+ (file.split(".png"))[0] + '_marker_mask.png')
+        file1 = ('new_'+ (file.split(".jpg"))[0] + '_marker_mask.png')
         img_path1 = os.path.join(path1, file1)
         gt = cv2.imread(img_path1)
         [h,w,c] = im.shape
