@@ -43,8 +43,8 @@ for file in files:
         img = transformer(img).float()
         gt_img = resize(gt, (128, 128), anti_aliasing=True)
         gt_img = transformer(gt_img).float()
-        im_tensor = img.cuda()
-        gt_tensor = gt_img.cuda()
+        im_tensor = img.unsqueeze(0).cuda()
+        gt_tensor = gt_img.unsqueeze(0).cuda()
         gt_tensor = gt.cuda()
         with torch.no_grad():
             out = net(im_tensor)
