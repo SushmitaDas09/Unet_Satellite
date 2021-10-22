@@ -16,6 +16,7 @@ path = "dataset_train"
 path1 = "results"
 files = os.listdir(path)
 i=0
+lossArr = []
 for file in files:
         img_path = os.path.join(path, file)
         im = cv2.imread(img_path)
