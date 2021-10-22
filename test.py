@@ -53,9 +53,10 @@ for file in files:
         net.eval()
         # net.eval()
         im_tensor = transformer(im).unsqueeze(0).cuda()
+        gt_tensor = transformer(gt).unsqueeze(0).cuda()
         with torch.no_grad():
             out = net(im_tensor)
-            loss = diceLoss(out, gt)
+            loss = diceLoss(out,gt_tensor)
             out = out.reshape(w,h).detach().cpu().numpy().astype(float)*255
         cv2.imwrite('Output_result/Output'+str(i)+'.png',out)
         lossArr.append(loss.data)
