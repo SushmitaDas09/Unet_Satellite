@@ -53,41 +53,11 @@ for file in files:
         net.eval()
         # net.eval()
         im_tensor = transformer(im).unsqueeze(0).cuda()
-        #print(im_tensor.shape)
-        out = net(im_tensor).reshape(w,h).detach().cpu().numpy().astype(float)*255
-        loss = diceLoss(out, gt)
-        lossArr.append(loss.data)
+        with torch.no_grad():
+            out = net(im_tensor)
+            loss = diceLoss(out, gt)
+            out = out.reshape(w,h).detach().cpu().numpy().astype(float)*255
         cv2.imwrite('Output_result/Output'+str(i)+'.png',out)
-        i = i+1
-        out[out<10], out[out>=10] = 0, 1
-        print(out.min(), out.max())
+        lossArr.append(loss.data)
 
-np.savetxt('training_data.txt', lossArr)
-
-
-# for i in range(len(files)):
-#     im = cv2.imread('Test')
-#     gt = cv2.imread('Test/test_results')
-#     [h,w,c] = im.shape
-#     print('Input image size:', [w,h])
-
-#     net = unet.ResUNet128((3, 128, 128)).cuda()
-
-#     checkpoint = torch.load('Saved_Net/trained_resUnet_2.pt')
-#     print('Best valid loss was: ', checkpoint['loss'])
-#     net.load_state_dict(checkpoint['model_state_dict'])
-#     # optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
-#     epoch = checkpoint['epoch']
-#     loss = checkpoint['loss']
-
-#     net.eval()
-#     # net.eval()
-
-#     im_tensor = transformer(im).unsqueeze(0).cuda()
-#     #print(im_tensor.shape)
-#     out = net(im_tensor).reshape(w,h).detach().cpu().numpy().astype(float)*255
-#     cv2.imwrite('Data_augmentation/Augmented_2/'+str(i)+'.png',out)
-#     out[out<10], out[out>=10] = 0, 1
-#     print(out.min(), out.max())
-#     # cv2.imshow('window', out)
-#     # cv2.waitKey(0)
+np.savetxt('testingg_data.txt', lossArr)
