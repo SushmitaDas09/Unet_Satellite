@@ -13,7 +13,7 @@ from skimage.transform import resize
 
 
 path = "dataset_train"
-path1 = "Test/test_results"
+path1 = "results"
 files = os.listdir(path)
 i=0
 for file in files:
