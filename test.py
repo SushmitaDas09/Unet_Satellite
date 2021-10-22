@@ -9,6 +9,7 @@ import unet
 #test code
 import os
 from common_funcs import diceLoss
+from skimage.transform import resize
 
 
 path = "dataset_train"
