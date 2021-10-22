@@ -35,7 +35,13 @@ for file in files:
          
         net.eval()
         # net.eval()
-        im_tensor = transformer(im).unsqueeze(0).cuda()
+        #im_tensor = transformer(im).unsqueeze(0).cuda()
+        img = resize(im, (128, 128), anti_aliasing=True)
+        img = transformer(img).float()
+        gt_img = resize(gt_img, (128, 128), anti_aliasing=True)
+        gt_img = transformer(gt_img).float()
+        im_tensor = img.cuda()
+        gt_tensor = gt_img.cuda()
         gt_tensor = gt.cuda()
         with torch.no_grad():
             out = net(im_tensor)
