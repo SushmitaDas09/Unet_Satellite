@@ -24,6 +24,8 @@ for file in files:
         gt = cv2.imread(img_path1)
         [h,w,c] = im.shape
         print('Input image size:', [w,h])
+        [h,w,c] = gt.shape
+        print('GT image size:', [w,h])
 
         net = unet.UNet128((3, 128, 128)).cuda()
 
