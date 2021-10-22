@@ -11,23 +11,6 @@ import os
 from common_funcs import diceLoss
 
 
-# path = "cmu_mini_data_1"
-# files = os.listdir(path)
-# new_image = np.zeros((256,256))
-# for file in files:
-#     if file.endswith('marker_mask.png'):
-#         img_path = os.path.join(path, file)
-#         image = cv2.imread(img_path)
-#         image = color.rgb2gray(image)
-#     #image = io.imread('image.png', as_gray=True)
-#         for i in range(256):
-#             for j in range(256):
-#                 if image[i,j] !=0:
-#                     new_image[i,j] = 255
-#                 else:
-#                     new_image[i,j] = 0
-#         cv2.imwrite(f'results/new_{file}', new_image)
-
 path = "dataset_train"
 path1 = "Test/test_results"
 files = os.listdir(path)
@@ -53,7 +36,7 @@ for file in files:
         net.eval()
         # net.eval()
         im_tensor = transformer(im).unsqueeze(0).cuda()
-        gt_tensor = transformer(gt).unsqueeze(0).cuda()
+        gt_tensor = gt.cuda()
         with torch.no_grad():
             out = net(im_tensor)
             loss = diceLoss(out,gt_tensor)
