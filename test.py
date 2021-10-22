@@ -8,6 +8,7 @@ transformer = transforms.ToTensor()
 import unet
 #test code
 import os
+from common_funcs import diceLoss
 
 
 # path = "cmu_mini_data_1"
@@ -58,6 +59,9 @@ for file in files:
         i = i+1
         out[out<10], out[out>=10] = 0, 1
         print(out.min(), out.max())
+        loss = diceLoss(out, gt)
+        lossArr.append(loss.data)
+np.savetxt('training_data.txt', lossArr)
 
 
 # for i in range(len(files)):
