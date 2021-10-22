@@ -55,12 +55,13 @@ for file in files:
         im_tensor = transformer(im).unsqueeze(0).cuda()
         #print(im_tensor.shape)
         out = net(im_tensor).reshape(w,h).detach().cpu().numpy().astype(float)*255
+        loss = diceLoss(out, gt)
+        lossArr.append(loss.data)
         cv2.imwrite('Output_result/Output'+str(i)+'.png',out)
         i = i+1
         out[out<10], out[out>=10] = 0, 1
         print(out.min(), out.max())
-        loss = diceLoss(out, gt)
-        lossArr.append(loss.data)
+
 np.savetxt('training_data.txt', lossArr)
 
 
