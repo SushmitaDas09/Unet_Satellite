@@ -9,6 +9,7 @@ import unet
 #test code
 import os
 from common_funcs import diceLoss
+from common_funcs import IOULoss
 from skimage.transform import resize
 
 
@@ -30,7 +31,7 @@ for file in files:
 
         net = unet.UNet128((3, 128, 128)).cuda()
 
-        checkpoint = torch.load('Saved_Net/trained_version_1.pt')
+        checkpoint = torch.load('Saved_Net/trained_version_1_IOU.pt')
         print('Best valid loss was: ', checkpoint['loss'])
         net.load_state_dict(checkpoint['model_state_dict'])
         # optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
@@ -46,9 +47,9 @@ for file in files:
         gt_tensor = transformer(gt).unsqueeze(0).cuda()
         with torch.no_grad():
             out = net(im_tensor)
-            loss = diceLoss(out,gt_tensor)
+            loss = IOULoss(out,gt_tensor)
             out = out.reshape(w,h).detach().cpu().numpy().astype(float)*255
-        cv2.imwrite('Output_result/Output'+str(i)+'.png',out)
+        cv2.imwrite('Output_result_IOU/Output'+str(i)+'.png',out)
         lossArr.append(loss.data)
 
-np.savetxt('testingg_data.txt', lossArr)
+np.savetxt('testing_data_IOU.txt', lossArr)
