@@ -10,6 +10,16 @@ def diceLoss(result, target):
 	dice = (2*inter)/union
 	return(1-dice)
 
+def IOU_loss(result, target):
+	# batchSize = result.shape[2]
+	# inter = torch.sum(torch.sum(result*target, dim = 2), dim = 1)
+	# union = torch.sum(torch.sum(result+target, dim = 2), dim = 1)
+	# dice = torch.sum((2*inter)/union)/batchSize
+	inter = torch.sum(result*target)
+	union = torch.sum(result+target)
+	IOU = inter/union
+	return(1-IOU)
+
 def dice(result, target):
 	inter = np.sum(result*target)
 	union = np.sum(result+target)
