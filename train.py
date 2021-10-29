@@ -113,7 +113,7 @@ class trainer():
                                 'model_state_dict': self.net.state_dict(),
                                 'optimizer_state_dict': self.optimizer.state_dict(),
                                 'loss': bestValidLoss
-                                }, 'Saved_Net/trained_version_IOU'+str(self.version)+'.pt')
+                                }, 'Saved_Net/trained_version_IOU_'+str(self.version)+'.pt')
             print('Best Valid Epoch: {}, Best Valid Loss: {}'.format(bestValidEpoch, bestValidLoss))
         np.savetxt('training_data_IOU.txt', lossData)
         
