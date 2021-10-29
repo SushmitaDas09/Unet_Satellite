@@ -14,7 +14,7 @@ import cv2
 # import defined modules
 from dataset import cmu_mini_dataset
 from common_funcs import diceLoss
-from common_funcs import IOULoss
+from common_funcs import iouLoss
 
 class trainer():
     def __init__(self,
@@ -72,7 +72,7 @@ class trainer():
 
 
         self.optimizer = optim.Adam(self.net.parameters(), lr=0.001)
-        self.criterion = IOULoss
+        self.criterion = iouLoss
 
     def train(self, epochs=12):
         bestValidLoss = np.inf
