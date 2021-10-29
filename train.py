@@ -14,7 +14,7 @@ import cv2
 # import defined modules
 from dataset import cmu_mini_dataset
 from common_funcs import diceLoss
-
+from common_funcs import IOULoss
 
 class trainer():
     def __init__(self,
@@ -72,7 +72,7 @@ class trainer():
 
 
         self.optimizer = optim.Adam(self.net.parameters(), lr=0.001)
-        self.criterion = diceLoss
+        self.criterion = IOULoss
 
     def train(self, epochs=12):
         bestValidLoss = np.inf
@@ -113,9 +113,9 @@ class trainer():
                                 'model_state_dict': self.net.state_dict(),
                                 'optimizer_state_dict': self.optimizer.state_dict(),
                                 'loss': bestValidLoss
-                                }, 'Saved_Net/trained_version_'+str(self.version)+'.pt')
+                                }, 'Saved_Net/trained_version_IOU'+str(self.version)+'.pt')
             print('Best Valid Epoch: {}, Best Valid Loss: {}'.format(bestValidEpoch, bestValidLoss))
-        np.savetxt('training_data.txt', lossData)
+        np.savetxt('training_data_IOU.txt', lossData)
         
 if __name__ == '__main__':
     my_trainer = trainer(version = 1, batch_size=10, num_workers=10, cont = False)
