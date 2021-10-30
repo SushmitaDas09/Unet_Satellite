@@ -113,10 +113,10 @@ class trainer():
                                 'model_state_dict': self.net.state_dict(),
                                 'optimizer_state_dict': self.optimizer.state_dict(),
                                 'loss': bestValidLoss
-                                }, 'Saved_Net/trained_version_IOU_'+str(self.version)+'.pt')
+                                }, 'Saved_Net/trained_version_IOU_Res_'+str(self.version)+'.pt')
             print('Best Valid Epoch: {}, Best Valid Loss: {}'.format(bestValidEpoch, bestValidLoss))
-        np.savetxt('training_data_IOU.txt', lossData)
+        np.savetxt('training_data_IOU_Res.txt', lossData)
         
 if __name__ == '__main__':
-    my_trainer = trainer(version = 1, batch_size=10, num_workers=10, cont = False)
-    my_trainer.train(epochs=1000)
+    my_trainer = trainer(version = 2, batch_size=10, num_workers=10, cont = False)
+    my_trainer.train(epochs=300)
