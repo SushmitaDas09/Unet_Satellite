@@ -1,4 +1,5 @@
 import torch, numpy as np
+SMOOTH = 1e-6
 
 def diceLoss(result, target):
 	# batchSize = result.shape[2]
@@ -6,8 +7,8 @@ def diceLoss(result, target):
 	# union = torch.sum(torch.sum(result+target, dim = 2), dim = 1)
 	# dice = torch.sum((2*inter)/union)/batchSize
 	inter = torch.sum(result*target)
-	union = torch.sum(result+target)
-	dice = (2*inter)/union
+	total = torch.sum(result+target)
+	dice = (2*inter+SMOOTH)/(total+SMOOTH)
 	return(1-dice)
 
 def iouLoss(result, target):
@@ -16,8 +17,8 @@ def iouLoss(result, target):
 	# union = torch.sum(torch.sum(result+target, dim = 2), dim = 1)
 	# dice = torch.sum((2*inter)/union)/batchSize
 	inter = torch.sum(result*target)
-	union = torch.sum(result+target)
-	iou = inter/union
+	total = torch.sum(result+target)
+	iou = (inter + SMOOTH)/(total-inter + SMOOTH)
 	return(1-iou)
 
 def dice(result, target):
