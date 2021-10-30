@@ -50,6 +50,7 @@ for file in files:
             loss = iouLoss(out,gt_tensor)
             out = out.reshape(w,h).detach().cpu().numpy().astype(float)*255
         cv2.imwrite('Output_result_IOU/Output'+str(i)+'.png',out)
+        i = i+1
         lossArr.append(loss.data)
 
 np.savetxt('testing_data_IOU.txt', lossArr)
