@@ -31,7 +31,7 @@ for file in files:
 
         net = unet.UNet128((3, 128, 128)).cuda()
 
-        checkpoint = torch.load('Saved_Net/trained_version_IOU_Res_1.pt')
+        checkpoint = torch.load('Saved_Net/trained_version_IOU_Res_2.pt')
         print('Best valid loss was: ', checkpoint['loss'])
         net.load_state_dict(checkpoint['model_state_dict'])
         # optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
