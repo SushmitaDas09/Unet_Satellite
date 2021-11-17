@@ -25,7 +25,7 @@ class cmu_mini_dataset(Dataset):
         self.transformer = transforms.ToTensor()
         self.path1 = inp_path
         self.path2 = gt_path
-        self.names2 = os.listdir(self.path2)
+        self.names = os.listdir(self.path2)
         #self.names1 = []
 #         for name in self.names2:
 #         	self.names1.append(name.split('_')[1]+'.jpg')
@@ -43,8 +43,8 @@ class cmu_mini_dataset(Dataset):
 
     def __getitem__(self, idx):
         #img_name1 = os.path.join(self.path1, self.names[idx])
-        img = os.path.join(self.path1, self.names1[idx])
-        gt_img = os.path.join(self.path2, self.names2[idx])           
+        img = os.path.join(self.path1, self.names[idx])
+        gt_img = os.path.join(self.path2, self.names[idx])           
         #img_name2 = os.path.join(self.path2, '_groundtruth_(1)_Inp'+self.names[idx][12:])
         image1 = cv2.imread(img)                                                
         image2 = cv2.imread(gt_img)
