@@ -26,8 +26,8 @@ class trainer():
             inp_path = 'Data_augmentation/Augmented_Edge_{}/Inp/output'.format(image_num) 
             gt_path = 'Data_augmentation/Augmented_Edge_{}/GT/output'.format(image_num)
         else:
-            inp_path = 'cmu_mini_data_1'
-            gt_path = 'results'
+            inp_path = 'input_multiclass'
+            gt_path = 'output_multiclass'
 
         # Create the dataset and split to training/validation
         my_dataset = cmu_mini_dataset(inp_path, gt_path)
