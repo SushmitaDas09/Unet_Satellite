@@ -38,7 +38,7 @@ class trainer():
         validLoader = DataLoader(valid_dataset, batch_size=batch_size, shuffle=False , num_workers=4)
         self.loader = {'Train': trainLoader, 'Valid': validLoader}
         for inp, gt in self.loader['Train']:
-            print('input shape', inp.shape, 'gt shape', gt.shape)
+            #print('input shape', inp.shape, 'gt shape', gt.shape)
             shape = inp.shape
             h,w = shape[2], shape[3]
             break
