@@ -150,7 +150,7 @@ class UNet128(nn.Module):
         out = self.up4(down4, out)
         out = self.up3(down3, out)
         out = self.classify(out)
-    out = self.convOut(out)
+        out = self.convOut(out)
         #out = torch.squeeze(out, dim=1)
         #out = torch.sigmoid(out)
         return out
