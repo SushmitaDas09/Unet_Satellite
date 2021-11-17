@@ -26,9 +26,9 @@ class cmu_mini_dataset(Dataset):
         self.path1 = inp_path
         self.path2 = gt_path
         self.names2 = os.listdir(self.path2)
-        self.names1 = []
-        for name in self.names2:
-        	self.names1.append(name.split('_')[1]+'.jpg')
+        #self.names1 = []
+#         for name in self.names2:
+#         	self.names1.append(name.split('_')[1]+'.jpg')
         # print(self.names)
     
     def trans(self, img):
