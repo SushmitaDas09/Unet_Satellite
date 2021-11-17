@@ -93,8 +93,8 @@ class trainer():
 
                         self.optimizer.zero_grad()   # zero the gradient buffers
                         out = self.net(inp)
-                        print('Shapes', inp.shape, gt.shape, out.shape)
-                        print(out.shape)
+                        #print('Shapes', inp.shape, gt.shape, out.shape)
+                        #print(out.shape)
                         loss = self.criterion(out, gt)
                         lossArr.append(loss.data)
                         if mode == 'Train':
@@ -120,4 +120,4 @@ class trainer():
         
 if __name__ == '__main__':
     my_trainer = trainer(version = 1, batch_size=10, num_workers=10, cont = False)
-    my_trainer.train(epochs=300)
+    my_trainer.train(epochs=100)
