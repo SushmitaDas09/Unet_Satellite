@@ -46,7 +46,8 @@ for file in files:
         gt_tensor = transformer(gt).unsqueeze(0).cuda()
         with torch.no_grad():
             out = net(im_tensor)
-            loss = iouLoss(out,gt_tensor)
+            print(out.shape)
+            #loss = iouLoss(out,gt_tensor)
             out = out.reshape(w,h).detach().cpu().numpy().astype(float)*255
         cv2.imwrite(os.path.join(output_multiclass,file),out)
         lossArr.append(loss.data)
