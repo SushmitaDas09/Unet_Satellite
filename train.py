@@ -119,5 +119,5 @@ class trainer():
         np.savetxt('training_data_IOU_Res.txt', lossData)
         
 if __name__ == '__main__':
-    my_trainer = trainer(version = 2, batch_size=10, num_workers=10, cont = False)
+    my_trainer = trainer(version = 1, batch_size=10, num_workers=10, cont = False)
     my_trainer.train(epochs=300)
