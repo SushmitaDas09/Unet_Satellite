@@ -72,7 +72,7 @@ class trainer():
 
 
         self.optimizer = optim.Adam(self.net.parameters(), lr=0.001)
-        self.criterion = iouLoss
+        self.criterion = nn.CrossEntropyLoss()
 
     def train(self, epochs=12):
         bestValidLoss = np.inf
