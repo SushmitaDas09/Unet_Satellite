@@ -13,16 +13,15 @@ from common_funcs import iouLoss
 from skimage.transform import resize
 
 
-path = "dataset_train"
-path1 = "results"
+path = "input_multiclass"
+path1 = "_multiclass"
 files = os.listdir(path)
-i=0
 lossArr = []
 for file in files:
         img_path = os.path.join(path, file)
         im = cv2.imread(img_path)
-        file1 = ('new_'+ (file.split(".jpg"))[0] + '_marker_mask.png')
-        img_path1 = os.path.join(path1, file1)
+        #file1 = ('new_'+ (file.split(".jpg"))[0] + '_marker_mask.png')
+        img_path1 = os.path.join(path1, file)
         gt = cv2.imread(img_path1)
         [h,w,c] = im.shape
         print('Input image size:', [w,h])
@@ -49,8 +48,7 @@ for file in files:
             out = net(im_tensor)
             loss = iouLoss(out,gt_tensor)
             out = out.reshape(w,h).detach().cpu().numpy().astype(float)*255
-        cv2.imwrite('Output_result_IOU_Res/Output'+str(i)+'.png',out)
-        i = i+1
+        cv2.imwrite(os.path.join(output_multiclass,file),out)
         lossArr.append(loss.data)
 
 np.savetxt('testing_data_IOU_Res.txt', lossArr)
