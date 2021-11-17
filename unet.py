@@ -133,7 +133,7 @@ class UNet128(nn.Module):
         self.up5 = StackDecoderOrg(512, 512, 256, kernel_size=3)  # 32
         self.up4 = StackDecoderOrg(256, 256, 128, kernel_size=3)  # 64
         self.up3 = StackDecoderOrg(128, 128, 64, kernel_size=3)  # 128
-        self.classify = nn.Conv2d(64, 1, kernel_size=1, padding=0, stride=1, bias=True)
+        self.classify = nn.Conv2d(64, 4, kernel_size=1, padding=0, stride=1, bias=True)
 
     def forward(self, x):
         out = x  # ;print('x    ',x.size())
@@ -149,7 +149,7 @@ class UNet128(nn.Module):
         out = self.up4(down4, out)
         out = self.up3(down3, out)
         out = self.classify(out)
-        out = torch.squeeze(out, dim=1)
+        #out = torch.squeeze(out, dim=1)
         #out = torch.sigmoid(out)
         return out
 
