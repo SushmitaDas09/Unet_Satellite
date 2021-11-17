@@ -48,7 +48,8 @@ for file in files:
             out = net(im_tensor)
             print(out.shape)
             #loss = iouLoss(out,gt_tensor)
-            out = out.reshape(w,h).detach().cpu().numpy().astype(float)*255
+            out = out.reshape(4,w,h).detach().cpu().numpy().astype(float)
+            out = np.argmax(out, axis=0)*64    
         cv2.imwrite(os.path.join(results_multiclass,file),out)
         lossArr.append(loss.data)
 
