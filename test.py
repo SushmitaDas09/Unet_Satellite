@@ -14,7 +14,7 @@ from skimage.transform import resize
 
 
 path = "input_multiclass"
-path1 = "_multiclass"
+path1 = "output_multiclass"
 files = os.listdir(path)
 lossArr = []
 for file in files:
@@ -49,7 +49,7 @@ for file in files:
             print(out.shape)
             #loss = iouLoss(out,gt_tensor)
             out = out.reshape(w,h).detach().cpu().numpy().astype(float)*255
-        cv2.imwrite(os.path.join(output_multiclass,file),out)
+        cv2.imwrite(os.path.join(results_multiclass,file),out)
         lossArr.append(loss.data)
 
 np.savetxt('testing_data_IOU_Res.txt', lossArr)
