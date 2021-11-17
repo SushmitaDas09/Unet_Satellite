@@ -50,7 +50,7 @@ class cmu_mini_dataset(Dataset):
         image2 = cv2.imread(gt_img)
         image2 = cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
         im_tensor1 = self.trans(image1)
-        im_tensor2 = torch.FloatTensor(resize(image2,(128,128),anti_aliasing=True))
+        im_tensor2 = torch.LongTensor(resize(image2,(128,128),anti_aliasing=True))
         return im_tensor1,im_tensor2
 
 
