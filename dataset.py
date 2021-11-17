@@ -39,7 +39,7 @@ class cmu_mini_dataset(Dataset):
 
 
     def __len__(self):
-        return len(self.names2)
+        return len(self.names)
 
     def __getitem__(self, idx):
         #img_name1 = os.path.join(self.path1, self.names[idx])
